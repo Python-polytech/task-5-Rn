@@ -2,9 +2,6 @@ from functools import lru_cache
 
 class CoordDescriptor:
 
-    def __init__(self, name):
-        self.name = name
-
     def __set_name__(self, owner, name):
         self.name = name
 
@@ -30,7 +27,7 @@ def make_point_class(n, name=None):
 
     class_name = name or f"Point{n}"
 
-    attrs = {f"x{i}": CoordDescriptor(f"x{i}") for i in range(n)}
+    attrs = {f"x{i}": CoordDescriptor() for i in range(n)}
 
     def __init__(self, *args):
         if len(args) != n:
